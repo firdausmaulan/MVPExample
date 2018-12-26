@@ -45,7 +45,7 @@ public class ProductPresenterTest {
         System.out.println("5");
         Mockito.verify(view).hideLoading();
         System.out.println("6");
-        Mockito.verify(view).showListProduct(response.getProduct());
+        Mockito.verify(view).showListProduct(response.getProducts());
         System.out.println("7");
     }
 }
