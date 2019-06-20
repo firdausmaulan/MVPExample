@@ -10,7 +10,5 @@ interface ProfileView extends BaseView {
 
     void showProfileFromAPI(Profile profile);
 
-    void showProfileFromDB(String profile);
-
-    void onSaveOrDelete(int id);
+    void showProfileFromDB(Profile profile);
 }

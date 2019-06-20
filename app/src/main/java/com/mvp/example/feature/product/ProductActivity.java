@@ -1,20 +1,23 @@
 package com.mvp.example.feature.product;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
 
 import com.mvp.example.R;
 import com.mvp.example.base.BaseActivity;
+import com.mvp.example.dataSource.remote.repository.Repository;
+import com.mvp.example.feature.profile.ProfileActivity;
 import com.mvp.example.model.product.Product;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.mvp.example.dataSource.remote.repository.Repository;
+import butterknife.OnClick;
 
 public class ProductActivity extends BaseActivity implements ProductView {
 
@@ -22,6 +25,8 @@ public class ProductActivity extends BaseActivity implements ProductView {
     RecyclerView rvProduct;
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.btn_show_profile)
+    Button buttonShowProfile;
 
     private ProductPresenter presenter;
     private ProductAdapter productAdapter;
@@ -41,6 +46,14 @@ public class ProductActivity extends BaseActivity implements ProductView {
                 presenter.requestProduct();
             }
         });
+
+        productAdapter = new ProductAdapter();
+        rvProduct.setAdapter(productAdapter);
+    }
+
+    @OnClick(R.id.btn_show_profile)
+    void showProfile() {
+        startActivity(new Intent(this, ProfileActivity.class));
     }
 
     @Override
@@ -55,8 +68,6 @@ public class ProductActivity extends BaseActivity implements ProductView {
 
     @Override
     public void showListProduct(List<Product> listProduct) {
-        productAdapter = new ProductAdapter(listProduct);
-        rvProduct.setLayoutManager(new LinearLayoutManager(this));
-        rvProduct.setAdapter(productAdapter);
+        productAdapter.addList(listProduct);
     }
 }

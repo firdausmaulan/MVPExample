@@ -7,19 +7,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.mvp.example.R;
 import com.mvp.example.model.product.Product;
 import com.mvp.example.util.ImageLoader;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-    private List<Product> listProduct;
+    private List<Product> listProduct = new ArrayList<>();
 
-    public ProductAdapter(List<Product> products) {
+    void addList(List<Product> products) {
         listProduct = products;
+        notifyDataSetChanged();
     }
 
     @NonNull
